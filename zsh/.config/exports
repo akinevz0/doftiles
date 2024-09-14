@@ -4,9 +4,8 @@ export BROWSER=/usr/bin/firefox
 export MOZ_WEBRENDER=1
 export MOZ_X11_EGL=1
 
-# export TERMINAL=gnome-terminal
-# export EDITOR=vim
-# export VISUAL=vim
+export EDITOR=nvim
+export VISUAL=vi
 
 export TASKRC=${HOME}/.config/taskrc
 

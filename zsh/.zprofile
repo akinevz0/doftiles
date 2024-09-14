@@ -4,20 +4,10 @@ if (systemctl -q &>/dev/null);
 		systemctl --no-block --user start xsession.target
 fi
 stty -ixon
-#export fpath=("${fpath}" "~/.local/share/zcomplete")
-
-export EXPORTS="${XDG_CONFIG_HOME}/.exports"
-export ALIASES="${XDG_CONFIG_HOME}/.aliases"
 
 export EDITOR=vim
+export LOCAL_BIN=$HOME/.local/bin
 export JDK_HOME="/usr/lib/jvm/default/"
-export PATH=$LOCAL_BIN:$PATH:$SFDX_PATH:$JDK_HOME/bin
-#source $EXPORTS
-#source $ALIASES
-#
-#export LIBGL_ALWAYS_INDIRECT=1 #GWSL
-##export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}'):0 #GWSL
-#export DISPLAY=$(grep nameserver /etc/resolv.conf | sed 's/nameserver //')":0"
-#export PULSE_SERVER=tcp:$(cat /etc/resolv.conf | grep nameserver | awk '{print $2; exit;}') #GWSL
+export PATH=$LOCAL_BIN:$PATH:$JDK_HOME/bin
 
 [[ -z $DISPLAY && $XDG_VTNR -eq 2 ]] && exec startx

@@ -1,61 +1,21 @@
 #!/bin/bash
 
-# incoming 
-# alias sxhkdrc="vim $HOME/.config/sxhkd"
-# #alias bspwmrc="vim $HOME/.config/bspwm"
-# alias wmrc="vim $HOME/.config/herbstluftwm/autostart"
-# alias sx="sxhkd"
-# alias bs="bspwm"
-# alias aliases="vim $HOME/.config/aliases && source $HOME/.config/aliases"
-# alias alisa=aliases
-# alias rc="vim $HOME/.config/rc"
-# alias profile="vim $HOME/.config/profile"
+# ls 
 
-# alias ls='ls --color=auto'
-# alias la='ls -l --color=auto'
-# alias lal='ls -al --color=auto'
-# alias l='ls'
-# alias s='ls -r'
+alias ls='ls --color=auto'
+alias la='ls -l --color=auto'
+alias all='ls -al --color=auto'
+alias l='ls'
+alias s='ls -r'
+
+# git
+
+# please
 
 # alias please='sudo "$BASH" -c "$(history -p !!)"'
 
-# alias status='git status'
-# alias commit='git commit'
-# alias addg='git add'
-# alias diffg='git diff'
-
-# # General
-# alias v="vim"
-# alias vv="vim ."
-
-# alias plan='vim +set\ ft=todo ~/.plan'
-# alias adventure='vim "~/adventures/$(date).txt"'
-# alias today='date;cal'
-
-# alias vimrc='vim .vim/vimrc'
-# alias zshrc="vim $HOME/.zshrc"
-
-#  # 
-#  # alias s="ls -tr -1h --color=tty"
-#  # alias sl="ls -r"
-#  # alias ll="ls -rlAt -1h --color=tty"
-#  # alias l="ls -tAh -1"
-#  # 
-
-# # Windows
-
-# alias explorer="explorer.exe"
-
-# # Arch Linux
+# archlinux 
 
 # alias ayy="yay -S"
 # alias yeet="yay -Rns"
 # alias hc=herbstclient
-
-# # Files
-
-# alias cd..="cd .."
-# alias cp="cp -vi"
-# alias df=duf||df
-# alias open=xdg-open
-
