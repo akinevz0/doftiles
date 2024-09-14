@@ -1,8 +1,9 @@
 #!/bin/bash
 
 # Define installation directories
-ZSH_INSTALL_DIR=~/.cache
-ZSH_CUSTOM=$ZSH_INSTALL_DIR/custom
+ZSH=${HOME}/.config/oh-my-zsh/
+ZSH_INSTALL_DIR=zsh/.cache/
+ZSH_CUSTOM=$ZSH/custom
 ZSH_PLUGINS_DIR=$ZSH_CUSTOM/plugins
 
 # Function to handle errors
@@ -27,18 +28,16 @@ install_plugin() {
     ln -s "$plugin_dir" "$plugin_dest" || handle_error "Failed to install plugin: $plugin_name"
 }
 
-# Call update submodules to pull the latest versions of the plugins+ohmyzsh
-git submodule update --init --recursive
-
 # Run Oh My Zsh install script
-echo "Running Oh My Zsh install script..."
-ZSH=~/.config/oh-my-zsh/ "$ZSH_INSTALL_DIR/oh-my-zsh/tools/install.sh" --unattended --keep-zshrc || handle_error "Oh My Zsh installation script failed"
+echo "Installing Oh My Zsh..."
+ln -st $ZSH_INSTALL_DIR/oh-my-zsh/ $ZSH || handle_error "Failed to install Oh My Zsh"
 
 echo "Fixing up permissions."
-fix-permissions || handle_error "Failed to fix permissions"
+fix-permissions $ZSH || handle_error "Failed to fix permissions"
 
 echo "Installing plugins..."
 for plugin in "${plugins[@]}"; do
     install_plugin "$plugin" || handle_error "Failed to install plugin: $plugin"
+done
 
 echo "Zsh installation completed successfully!"
