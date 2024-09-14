@@ -1,4 +1,4 @@
-/shell/.cache/
+.cache/
 *.swp
 *.un~
 /vim/.vim/bundle/
