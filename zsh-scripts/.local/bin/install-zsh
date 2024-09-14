@@ -1,8 +1,9 @@
 #!/bin/bash
 
 # Define the directories
-ZSH_INSTALL_DIR=${HOME}/.local/share
-ZSH_DIR=$ZSH_INSTALL_DIR/oh-my-zsh
+BASE=zsh-scripts
+INSTALL_DIR=${BASE}/.local/share
+ZSH_DIR=$INSTALL_DIR/oh-my-zsh
 ZSH_CUSTOM=$ZSH_DIR/custom
 ZSH_PLUGINS_DIR=$ZSH_CUSTOM/plugins
 
@@ -13,20 +14,37 @@ handle_error() {
     exit 1
 }
 
+zsh_ext=(
+    "https://github.com/romkatv/powerlevel10k"
+    "https://github.com/ohmyzsh/oh-my-zsh"
+)
+
 # Define plugins
 plugins=(
-    "zsh-completions"
-    "zsh-autosuggestions"
-    "zsh-syntax-highlighting"
+    "https://github.com/zsh-users/zsh-completions"
+    "https://github.com/zsh-users/zsh-autosuggestions"
+    "https://github.com/zsh-users/zsh-syntax-highlighting"
 )
 
 # Function to install a plugin
 install_plugin() {
     plugin_name=$1
-    plugin_dir=$ZSH_INSTALL_DIR/$plugin_name
-    plugin_dest=$ZSH_PLUGINS_DIR/
-    ln -s "$plugin_dir" "$plugin_dest" || handle_error "Failed to install plugin: $plugin_name"
+    plugin_dir=$INSTALL_DIR/$plugin_name
+    plugin_dest=$ZSH_PLUGINS_DIR/${plugin_name##*/}
+    git submodule add "$plugin_dir" "$plugin_dest" || handle_error "Failed to install plugin: $plugin_name"
 }
+
+install_ext() {
+    ext_name=$1
+    ext_dir=$INSTALL_DIR/${ext_name##*/}
+    git submodule add $ext_name $ext_dir || handle_error "Failed to install extension: $ext_name"
+}
+
+# Install oh-my-zsh and p10k
+echo "Installing oh-my-zsh and p10k"
+for ext in "${zsh_ext[@]}"; do
+    install_ext $ext || handle_error "Failed to install extension: $ext"
+done
 
 echo "Installing plugins..."
 for plugin in "${plugins[@]}"; do

@@ -13,3 +13,6 @@
 [submodule "zsh-scripts/.local/share/zsh-syntax-highlighting"]
 	path = zsh-scripts/.local/share/zsh-syntax-highlighting
 	url = https://github.com/zsh-users/zsh-syntax-highlighting
+[submodule "zsh-scripts/.local/share/ohmyzsh"]
+	path = zsh-scripts/.local/share/ohmyzsh
+	url = https://github.com/ohmyzsh/ohmyzsh
