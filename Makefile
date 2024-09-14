@@ -4,52 +4,49 @@
 PACKAGES := herbstluftwm neovim zsh rofi dunst polybar
 INSTALL_PACKAGES := stow curl $(PACKAGES)
 
-# Default target
-all: install
+all: install stow
 
 # Install packages using apt
 install:
-	@echo "Installing packages..."
 	sudo apt update
 	sudo apt install -y $(INSTALL_PACKAGES)
 	@echo "Installation complete."
 
-# Stow a specific package
-install-%:
-	@echo "Stowing package $*..."
-	stow -v -t ~ $*
-	@echo "Stowing of $* complete."
-
-# Special directive for stowing zsh
-install-zsh:
-	@echo "Stowing zsh package..."
-	stow -v -t ~ zsh
-	@echo "Installing oh-my-zsh and powerlevel10k..."
-	export ZSH="$(HOME)/.config/oh-my-zsh"
-	export ZSH_CUSTOM="$(HOME)/.config/oh-my-zsh/custom"
-	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-	git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $(ZSH_CUSTOM)/themes/powerlevel10k
-	@echo "Stowing of zsh and installation of oh-my-zsh and powerlevel10k complete."
-
-# Clean target (optional, can be used to remove installed packages if needed)
-clean-uninstall:
-	@echo "Removing installed packages..."
+uninstall:
 	sudo apt remove -y $(PACKAGES)
 	@echo "Removal complete."
 
-clean-packages:
-	@echo "Unstowing all packages..."
+# Stow packages
+stow-%:
+	@if echo $(PACKAGES) | grep -q $*; then \
+		stow -v -t $(HOME) $*; \
+		echo "Stowing $* complete."; \
+	else \
+		echo "Error: $* is not in the list of packages."; \
+		exit 1; \
+	fi
+
+unstow-%:
+	@if echo $(PACKAGES) | grep -q $*; then \
+		stow -D -v -t $(HOME) $*; \
+		echo "Unstowing $* complete."; \
+	else \
+		echo "Error: $* is not in the list of packages."; \
+		exit 1; \
+	fi
+
+stow:
 	@for package in $(PACKAGES); do \
-		stow -v -D -t ~ ${package} || true; \
+		echo "Stowing $$package."; \
+		$(MAKE) stow-$$package 1>/dev/null; \
+	done
+	@echo "Stowing complete."
+
+unstow:
+	@for package in $(PACKAGES); do \
+		echo "Unstowing $$package."; \
+		$(MAKE) unstow-$$package 1>/dev/null; \
 	done
 	@echo "Unstowing complete."
 
-# Unstow a specific package
-clean-%:
-	@echo "Unstowing package $*..."
-	stow -v -D -t ~ $*
-	@echo "Unstowing of $* complete."
-
-
-clean: clean-packages clean-uninstall
 .PHONY: all install clean
