@@ -1,7 +1,9 @@
 # Makefile for installing required packages
 
 # List of packages to install
-PACKAGES := herbstluftwm neovim zsh rofi dunst polybar
+# PACKAGES := herbstluftwm neovim zsh rofi dunst polybar
+# List of supported packages
+PACKAGES := neovim zsh
 INSTALL_PACKAGES := stow curl $(PACKAGES)
 
 all: install stow
