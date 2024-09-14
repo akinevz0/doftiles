@@ -49,4 +49,6 @@ unstow:
 	done
 	@echo "Unstowing complete."
 
+clean: unstow uninstall
+
 .PHONY: all install clean
