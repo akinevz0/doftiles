@@ -6,14 +6,13 @@ fi
 stty -ixon
 #export fpath=("${fpath}" "~/.local/share/zcomplete")
 
-export EXPORTS="${HOME}/.exports"
-export ALIASES="${HOME}/.aliases"
+export EXPORTS="${XDG_CONFIG_HOME}/.exports"
+export ALIASES="${XDG_CONFIG_HOME}/.aliases"
 
-
-source $EXPORTS
 export EDITOR=vim
 export JDK_HOME="/usr/lib/jvm/default/"
 export PATH=$LOCAL_BIN:$PATH:$SFDX_PATH:$JDK_HOME/bin
+#source $EXPORTS
 #source $ALIASES
 #
 #export LIBGL_ALWAYS_INDIRECT=1 #GWSL
