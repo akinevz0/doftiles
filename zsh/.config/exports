@@ -8,8 +8,9 @@ export MOZ_WEBRENDER=1
 export MOZ_X11_EGL=1
 
 # Added from install-zsh and clean-zsh scripts
-export ZSH_CUSTOM=~/.config/oh-my-zsh/custom
+export ZSH_CUSTOM=~/.local/share/oh-my-zsh/custom
 export ZSH_PLUGINS_DIR=$ZSH_CUSTOM/plugins
+export ZSH_THEMES_DIR=$ZSH_CUSTOM/themes
 
 export VISUAL=vi
 export EDITOR=nvim

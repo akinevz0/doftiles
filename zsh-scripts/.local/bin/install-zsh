@@ -5,7 +5,6 @@ BASE=zsh-scripts
 INSTALL_DIR=${BASE}/.local/share
 ZSH_DIR=$INSTALL_DIR/oh-my-zsh
 ZSH_CUSTOM=$ZSH_DIR/custom
-ZSH_PLUGINS_DIR=$ZSH_CUSTOM/plugins
 
 # Function to handle errors
 handle_error() {
@@ -15,8 +14,11 @@ handle_error() {
 }
 
 zsh_ext=(
-    "https://github.com/romkatv/powerlevel10k"
     "https://github.com/ohmyzsh/oh-my-zsh"
+)
+
+zsh_themes=(
+    "https://github.com/romkatv/powerlevel10k"
 )
 
 # Define plugins
@@ -26,12 +28,19 @@ plugins=(
     "https://github.com/zsh-users/zsh-syntax-highlighting"
 )
 
-# Function to install a plugin
 install_plugin() {
     plugin_name=$1
-    plugin_dir=$ZSH_PLUGINS_DIR/
+    plugin_dir=$ZSH_CUSTOM/plugins/
     pushd $plugin_dir
     git submodule add -f $plugin_name || handle_error "Failed to install plugin: $plugin_name"
+    popd
+}
+
+install_theme() {
+    theme_name=$1
+    theme_dir=$ZSH_CUSTOM/themes/
+    pushd $theme_dir
+    git submodule add -f $theme_name || handle_error "Failed to install theme: $theme_name"
     popd
 }
 
@@ -42,12 +51,27 @@ install_ext() {
 }
 
 # Install oh-my-zsh and p10k
-echo "Installing oh-my-zsh and p10k"
+echo "Installing oh-my-zsh"
 for ext in "${zsh_ext[@]}"; do
     install_ext $ext || handle_error "Failed to install extension: $ext"
 done
+
+# Install themes
+echo "Installing themes..."
+for theme in "${zsh_themes[@]}"; do
+    install_theme "$theme" || handle_error "Failed to install theme: $theme"
+done
+
 
 echo "Installing plugins..."
 for plugin in "${plugins[@]}"; do
     install_plugin "$plugin" || handle_error "Failed to install plugin: $plugin"
 done
+
+fix-permissions() {
+    folder=$1
+    echo "Fixing permissions for ${folder}..."
+    chmod -R o-w,g-w $folder || handle_error "Failed to fix permissions"
+}
+
+fix-permissions $ZSH_DIR 

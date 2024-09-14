@@ -1,4 +1,4 @@
 *.swp
 *.un~
 viminfo
-zsh/.local/share/nvim/
+neovim/.local/share/nvim/shada/
