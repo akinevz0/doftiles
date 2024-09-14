@@ -34,6 +34,13 @@ stow-%:
 		exit 1; \
 	fi
 
+unstow-zsh:
+	@$(HOME)/.local/bin/clean-zsh
+	@echo "Running zsh clean script complete."
+	stow -D -v -t $(HOME) zsh
+	@echo "Unstowing zsh complete."
+
+
 unstow-%:
 	@if echo $(PACKAGES) | grep -q $*; then \
 		stow -D -v -t $(HOME) $*; \
