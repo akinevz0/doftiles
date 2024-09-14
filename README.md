@@ -43,4 +43,12 @@ This is where my configs live.
    make unstow
 ```
 
-7. Restart your terminal or run `source ~/.zshrc` (or your shell's config file) to apply changes.
+## Adopting packages
+
+7. You may optionally want to adopt the packages from your current setup.
+
+```
+   make adopt-zsh adopt-neovim ...
+```
+
+8. Additional packages can be created by making a stow package-directory and adding an entry to the Makefile's PACKAGES.
