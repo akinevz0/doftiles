@@ -28,10 +28,6 @@ install_plugin() {
     ln -s "$plugin_dir" "$plugin_dest" || handle_error "Failed to install plugin: $plugin_name"
 }
 
-# Run Oh My Zsh install script
-echo "Installing Oh My Zsh..."
-ln -st $ZSH_INSTALL_DIR/oh-my-zsh/ $ZSH || handle_error "Failed to install Oh My Zsh"
-
 echo "Fixing up permissions."
 fix-permissions $ZSH || handle_error "Failed to fix permissions"
 
