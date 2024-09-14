@@ -1,6 +1,15 @@
-[submodule "shell/.cache/powerlevel10k"]
+[submodule "zsh/.cache/powerlevel10k"]
 	path = zsh/.cache/powerlevel10k
 	url = https://github.com/romkatv/powerlevel10k.git
-[submodule "shell/.cache/oh-my-zsh"]
+[submodule "zsh/.cache/oh-my-zsh"]
 	path = zsh/.cache/oh-my-zsh
-	url = https://github.com/Akinevz/ohmyzsh
+	url = https://github.com/ohmyzsh/ohmyzsh
+[submodule "zsh/.cache/zsh-completions"]
+	path = zsh/.cache/zsh-completions
+	url = https://github.com/zsh-users/zsh-completions
+[submodule "zsh/.cache/zsh-autosuggestions"]
+	path = zsh/.cache/zsh-autosuggestions
+	url = https://github.com/zsh-users/zsh-autosuggestions
+[submodule "zsh/.cache/zsh-syntax-highlighting"]
+	path = zsh/.cache/zsh-syntax-highlighting
+	url = https://github.com/zsh-users/zsh-syntax-highlighting
