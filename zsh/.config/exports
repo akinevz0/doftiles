@@ -1,12 +1,18 @@
 export XDG_CONFIG_HOME=~/.config
+export JDK_HOME="/usr/lib/jvm/default/"
 
-export BROWSER=/usr/bin/firefox
+export LOCAL_BIN=$HOME/.local/bin
+export PATH=$LOCAL_BIN:$PATH:$JDK_HOME/bin
+
 export MOZ_WEBRENDER=1
 export MOZ_X11_EGL=1
 
-export EDITOR=nvim
-export VISUAL=vi
+# Added from install-zsh and clean-zsh scripts
+export ZSH_INSTALL_DIR=~/.config/oh-my-zsh
+export ZSH_CUSTOM=~/.config/oh-my-zsh/custom
+export ZSH_PLUGINS_DIR=$ZSH_CUSTOM/plugins
 
-export TASKRC=${HOME}/.config/taskrc
+export VISUAL=vi
+export EDITOR=nvim
 
 export WALLPAPER=~/.local/share/wall.jpg
