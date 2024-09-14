@@ -18,6 +18,12 @@ uninstall:
 	sudo apt remove -y $(PACKAGES)
 	@echo "Removal complete."
 
+stow-zsh:
+	stow -v -t $(HOME) zsh
+	@echo "Stowing zsh complete."
+	@$(HOME)/.local/bin/install-zsh
+	@echo "Running zsh install script complete."
+ 
 # Stow packages
 stow-%:
 	@if echo $(PACKAGES) | grep -q $*; then \
