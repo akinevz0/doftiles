@@ -29,15 +29,16 @@ plugins=(
 # Function to install a plugin
 install_plugin() {
     plugin_name=$1
-    plugin_dir=$INSTALL_DIR/$plugin_name
-    plugin_dest=$ZSH_PLUGINS_DIR/${plugin_name##*/}
-    git submodule add "$plugin_dir" "$plugin_dest" || handle_error "Failed to install plugin: $plugin_name"
+    plugin_dir=$ZSH_PLUGINS_DIR/
+    pushd $plugin_dir
+    git submodule add -f $plugin_name || handle_error "Failed to install plugin: $plugin_name"
+    popd
 }
 
 install_ext() {
     ext_name=$1
     ext_dir=$INSTALL_DIR/${ext_name##*/}
-    git submodule add $ext_name $ext_dir || handle_error "Failed to install extension: $ext_name"
+    git submodule add -f $ext_name $ext_dir || handle_error "Failed to install extension: $ext_name"
 }
 
 # Install oh-my-zsh and p10k

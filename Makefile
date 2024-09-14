@@ -23,10 +23,10 @@ uninstall:
 # Stow packages
 stow-zsh: stow-zsh-scripts
 	@git submodule update --init --recursive
+	@echo "Running zsh plugin scripts."
+	@$(HOME)/.local/bin/install-zsh
 	@echo "Stowing zsh."
 	stow -v -t $(HOME) zsh
-	@echo "Running zsh install scripts."
-	@$(HOME)/.local/bin/install-zsh
 
 stow-%:
 	@if echo $(PACKAGES) | grep -q $*; then \
