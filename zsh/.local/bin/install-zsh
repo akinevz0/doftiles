@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Define installation directories
 ZSH_INSTALL_DIR=~/.config/oh-my-zsh
@@ -26,6 +26,9 @@ for plugin in "${plugins[@]}"; do
     echo "Installing $plugin..."
     git clone "https://github.com/zsh-users/$plugin" "$ZSH_PLUGINS_DIR/$plugin" || handle_error "Failed to clone $plugin repository"
 done
+
+# Fixing permissions
+compaudit | xargs chmod g-w,o-w
 
 # Run Oh My Zsh install script
 echo "Running Oh My Zsh install script..."

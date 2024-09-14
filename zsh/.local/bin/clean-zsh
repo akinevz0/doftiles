@@ -1,8 +1,8 @@
-#!/bin/sh
+#!/bin/bash
 
 # Define the directories to be removed
 ZSH_INSTALL_DIR=~/.config/oh-my-zsh
-ZSH_CUSTOM=~/.config/oh-my-zsh/custom
+ZSH_CUSTOM=$ZSH_INSTALL_DIR/custom
 ZSH_PLUGINS_DIR=$ZSH_CUSTOM/plugins
 
 # Remove Oh My Zsh directory
@@ -12,7 +12,8 @@ if [ -d "$ZSH_INSTALL_DIR" ]; then
 fi
 
 # Remove custom plugins directories
-plugins=("zsh-completions" "zsh-autosuggestions" "zsh-syntax-highlighting")
+plugins=("zsh-completions" "zsh-autosuggestions" "zsh-syntax-highlighting") 
+
 for plugin in "${plugins[@]}"; do
     plugin_dir="$ZSH_PLUGINS_DIR/$plugin"
     if [ -d "$plugin_dir" ]; then
