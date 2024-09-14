@@ -68,6 +68,7 @@ unstow-zsh:
 		$(HOME)/.local/bin/clean-zsh; \
 	fi
 	stow -D -v -t $(HOME) zsh
+	stow -D -v -t $(HOME) zsh-scripts
 	@echo "Unstowing zsh complete."
 
 unstow-%:
