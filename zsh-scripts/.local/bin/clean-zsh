@@ -1,27 +1,27 @@
 #!/bin/bash
 
-# Define the directories to be removed
-ZSH_INSTALL_DIR=~/.config/oh-my-zsh
-ZSH_CUSTOM=$ZSH_INSTALL_DIR/custom
+# Define the directories
+ZSH_INSTALL_DIR=${HOME}/.local/share
+ZSH_DIR=$ZSH_INSTALL_DIR/oh-my-zsh
+ZSH_CUSTOM=$ZSH_DIR/custom
 ZSH_PLUGINS_DIR=$ZSH_CUSTOM/plugins
 
-# Remove Oh My Zsh directory
-if [ -d "$ZSH_INSTALL_DIR" ]; then
-    echo "Removing Oh My Zsh directory..."
-    rm -rf "$ZSH_INSTALL_DIR"
-fi
+# Function to handle errors
+handle_error() {
+    echo "Error: $1" >&2
+    echo "Ensure you're in the doftiles directory and try again."
+    exit 1
+}
 
 # Remove .zcompdump files
 zcompdump_files=(~/.zcompdump*)
 if [ ${#zcompdump_files[@]} -gt 0 ]; then
     echo "Removing .zcompdump files..."
-    rm -f ~/.zcompdump*
+    rm -f ~/.zcompdump* || handle_error "Failed to remove .zcompdump files"
 fi
 
 # Remove zsh_history file
 if [ -f ~/.zsh_history ]; then
     echo "Removing zsh_history file..."
-    rm -f ~/.zsh_history
+    rm -f ~/.zsh_history || handle_error "Failed to remove zsh_history file"
 fi
-
-echo "Zsh cleanup completed successfully."

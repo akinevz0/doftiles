@@ -30,8 +30,8 @@ stow-zsh: stow-zsh-scripts
 
 stow-%:
 	@if echo $(PACKAGES) | grep -q $*; then \
+		echo "Stowing $*."; \
 		stow -v -t $(HOME) $*; \
-		echo "Stowing $* complete."; \
 	else \
 		echo "Error: $* is not in the list of packages."; \
 		exit 1; \

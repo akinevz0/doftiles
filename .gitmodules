@@ -1,15 +1,15 @@
-[submodule "zsh-scripts/.cache/powerlevel10k"]
-	path = zsh-scripts/.cache/powerlevel10k
+[submodule "zsh-scripts/.local/share/powerlevel10k"]
+	path = zsh-scripts/.local/share/powerlevel10k
 	url = https://github.com/romkatv/powerlevel10k
-[submodule "zsh-scripts/.cache/oh-my-zsh"]
-	path = zsh-scripts/.cache/oh-my-zsh
+[submodule "zsh-scripts/.local/share/oh-my-zsh"]
+	path = zsh-scripts/.local/share/oh-my-zsh
 	url = https://github.com/ohmyzsh/ohmyzsh
-[submodule "zsh-scripts/.cache/zsh-completions"]
-	path = zsh-scripts/.cache/zsh-completions
+[submodule "zsh-scripts/.local/share/zsh-completions"]
+	path = zsh-scripts/.local/share/zsh-completions
 	url = https://github.com/zsh-users/zsh-completions
-[submodule "zsh-scripts/.cache/zsh-autosuggestions"]
-	path = zsh-scripts/.cache/zsh-autosuggestions
+[submodule "zsh-scripts/.local/share/zsh-autosuggestions"]
+	path = zsh-scripts/.local/share/zsh-autosuggestions
 	url = https://github.com/zsh-users/zsh-autosuggestions
-[submodule "zsh-scripts/.cache/zsh-syntax-highlighting"]
-	path = zsh-scripts/.cache/zsh-syntax-highlighting
+[submodule "zsh-scripts/.local/share/zsh-syntax-highlighting"]
+	path = zsh-scripts/.local/share/zsh-syntax-highlighting
 	url = https://github.com/zsh-users/zsh-syntax-highlighting
