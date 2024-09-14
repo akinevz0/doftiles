@@ -1,9 +1,12 @@
 [submodule "zsh-scripts/.cache/powerlevel10k"]
 	path = zsh-scripts/.cache/powerlevel10k
+	url = https://github.com/romkatv/powerlevel10k
 [submodule "zsh-scripts/.cache/oh-my-zsh"]
 	path = zsh-scripts/.cache/oh-my-zsh
+	url = https://github.com/ohmyzsh/ohmyzsh
 [submodule "zsh-scripts/.cache/zsh-completions"]
 	path = zsh-scripts/.cache/zsh-completions
+	url = https://github.com/zsh-users/zsh-completions
 [submodule "zsh-scripts/.cache/zsh-autosuggestions"]
 	path = zsh-scripts/.cache/zsh-autosuggestions
 	url = https://github.com/zsh-users/zsh-autosuggestions
