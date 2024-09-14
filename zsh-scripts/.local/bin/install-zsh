@@ -1,0 +1,33 @@
+#!/bin/bash
+
+# Define installation directories
+ZSH_INSTALL_DIR=~/.cache/oh-my-zsh
+ZSH_CUSTOM=$ZSH_INSTALL_DIR/custom
+ZSH_PLUGINS_DIR=$ZSH_CUSTOM/plugins
+
+# Function to handle errors
+handle_error() {
+    echo "Error: $1" >&2
+    echo "Ensure you're in the doftiles directory and try again."
+    exit 1
+}
+
+# Define plugins
+plugins=(
+    "zsh-completions"
+    "zsh-autosuggestions"
+    "zsh-syntax-highlighting"
+)
+
+# Call update-submodules to pull the latest versions of the plugins+ohmyzsh
+echo "Installing custom plugins..."
+update-submodules "${plugins[@]}" || handle_error "Failed to pull custom plugins"
+
+# Run Oh My Zsh install script
+echo "Running Oh My Zsh install script..."
+ZSH=~/.config/oh-my-zsh "$ZSH_INSTALL_DIR/tools/install.sh" --unattended --keep-zshrc || handle_error "Oh My Zsh installation script failed"
+
+echo "Fixing up permissions."
+fix-permissions || handle_error "Failed to fix permissions"
+
+echo "Zsh installation completed successfully!"

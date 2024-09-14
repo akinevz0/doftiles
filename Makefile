@@ -4,8 +4,8 @@
 # PACKAGES := herbstluftwm neovim zsh rofi dunst polybar 
 
 # List of supported packages
-PACKAGES := zsh neovim
-INSTALL_PACKAGES := stow curl $(PACKAGES)
+PACKAGES := zsh-scripts zsh neovim
+INSTALL_PACKAGES := stow curl zsh neovim
 UNINSTALL_PACKAGES := neovim
 
 all: install stow
@@ -21,13 +21,11 @@ uninstall:
 	@echo "Removed $(UNINSTALL_PACKAGES)."
 
 # Stow packages
-stow-zsh:
+stow-zsh: stow-zsh-scripts
 	@echo "Stowing zsh."
 	stow -v -t $(HOME) zsh
 	@echo "Running zsh install scripts."
 	@$(HOME)/.local/bin/install-zsh
-	@echo "Fixing up permissions."
-	@$(HOME)/.local/bin/fix-permissions
 
 stow-%:
 	@if echo $(PACKAGES) | grep -q $*; then \
@@ -48,8 +46,9 @@ stow:
 # Adopt packages
 adopt-%:
 	@if echo $(PACKAGES) | grep -q $*; then \
-		stow --adopt -R -v -t $(HOME) $*; \
+		stow --adopt -v -t $(HOME) $*; \
 		echo "Adopting $* complete."; \
+		stow -D -v -t $(HOME) $*; \
 	else \
 		echo "Error: $* is not in the list of packages."; \
 		exit 1; \
@@ -65,8 +64,8 @@ adopt:
 # Unstow packages
 unstow-zsh:
 	@if [ -f $(HOME)/.local/bin/clean-zsh ]; then \
-		$(HOME)/.local/bin/clean-zsh; \
 		echo "Running zsh cleanup script."; \
+		$(HOME)/.local/bin/clean-zsh; \
 	fi
 	stow -D -v -t $(HOME) zsh
 	@echo "Unstowing zsh complete."

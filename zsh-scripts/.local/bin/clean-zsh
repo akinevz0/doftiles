@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Define the directories to be removed
-ZSH_INSTALL_DIR=~/.cache/oh-my-zsh
+ZSH_INSTALL_DIR=~/.config/oh-my-zsh
 ZSH_CUSTOM=$ZSH_INSTALL_DIR/custom
 ZSH_PLUGINS_DIR=$ZSH_CUSTOM/plugins
 
@@ -10,17 +10,6 @@ if [ -d "$ZSH_INSTALL_DIR" ]; then
     echo "Removing Oh My Zsh directory..."
     rm -rf "$ZSH_INSTALL_DIR"
 fi
-
-# Remove custom plugins directories
-plugins=("zsh-completions" "zsh-autosuggestions" "zsh-syntax-highlighting") 
-
-for plugin in "${plugins[@]}"; do
-    plugin_dir="$ZSH_PLUGINS_DIR/$plugin"
-    if [ -d "$plugin_dir" ]; then
-        echo "Removing $plugin plugin..."
-        rm -rf "$plugin_dir"
-    fi
-done
 
 # Remove .zcompdump files
 zcompdump_files=(~/.zcompdump*)
