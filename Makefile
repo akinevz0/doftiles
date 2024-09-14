@@ -1,10 +1,12 @@
 # Makefile for installing required packages
 
 # List of packages to install
-# PACKAGES := herbstluftwm neovim zsh rofi dunst polybar
+# PACKAGES := herbstluftwm neovim zsh rofi dunst polybar 
+
 # List of supported packages
-PACKAGES := neovim
-INSTALL_PACKAGES := stow curl zsh $(PACKAGES)
+PACKAGES := zsh neovim
+INSTALL_PACKAGES := stow curl $(PACKAGES)
+UNINSTALL_PACKAGES := neovim
 
 all: install stow
 
@@ -12,39 +14,25 @@ all: install stow
 install:
 	sudo apt update
 	sudo apt install -y $(INSTALL_PACKAGES)
-	@echo "Installation complete."
+	@echo "Installed $(INSTALL_PACKAGES)."
 
 uninstall:
-	sudo apt remove -y $(PACKAGES)
-	@echo "Removal complete."
+	sudo apt remove -y $(UNINSTALL_PACKAGES)
+	@echo "Removed $(UNINSTALL_PACKAGES)."
 
-stow-zsh:
-	stow -v -t $(HOME) zsh
-	@echo "Stowing zsh complete."
-	@$(HOME)/.local/bin/install-zsh
-	@echo "Running zsh install script complete."
- 
 # Stow packages
+stow-zsh:
+	@echo "Stowing zsh."
+	stow -v -t $(HOME) zsh
+	@echo "Running zsh install scripts."
+	@$(HOME)/.local/bin/install-zsh
+	@echo "Fixing up permissions."
+	@$(HOME)/.local/bin/fix-permissions
+
 stow-%:
 	@if echo $(PACKAGES) | grep -q $*; then \
 		stow -v -t $(HOME) $*; \
 		echo "Stowing $* complete."; \
-	else \
-		echo "Error: $* is not in the list of packages."; \
-		exit 1; \
-	fi
-
-unstow-zsh:
-	@$(HOME)/.local/bin/clean-zsh
-	@echo "Running zsh clean script complete."
-	stow -D -v -t $(HOME) zsh
-	@echo "Unstowing zsh complete."
-
-
-unstow-%:
-	@if echo $(PACKAGES) | grep -q $*; then \
-		stow -D -v -t $(HOME) $*; \
-		echo "Unstowing $* complete."; \
 	else \
 		echo "Error: $* is not in the list of packages."; \
 		exit 1; \
@@ -57,6 +45,41 @@ stow:
 	done
 	@echo "Stowing complete."
 
+# Adopt packages
+adopt-%:
+	@if echo $(PACKAGES) | grep -q $*; then \
+		stow --adopt -R -v -t $(HOME) $*; \
+		echo "Adopting $* complete."; \
+	else \
+		echo "Error: $* is not in the list of packages."; \
+		exit 1; \
+	fi
+
+adopt:
+	@for package in $(PACKAGES); do \
+		echo "Adopting $$package."; \
+		$(MAKE) adopt-$$package 1>/dev/null; \
+	done
+	@echo "Adoption complete."
+
+# Unstow packages
+unstow-zsh:
+	@if [ -f $(HOME)/.local/bin/clean-zsh ]; then \
+		$(HOME)/.local/bin/clean-zsh; \
+		echo "Running zsh cleanup script."; \
+	fi
+	stow -D -v -t $(HOME) zsh
+	@echo "Unstowing zsh complete."
+
+unstow-%:
+	@if echo $(PACKAGES) | grep -q $*; then \
+		stow -D -v -t $(HOME) $*; \
+		echo "Unstowing $* complete."; \
+	else \
+		echo "Error: $* is not in the list of packages."; \
+		exit 1; \
+	fi
+
 unstow:
 	@for package in $(PACKAGES); do \
 		echo "Unstowing $$package."; \
@@ -66,4 +89,4 @@ unstow:
 
 clean: unstow uninstall
 
-.PHONY: all install clean
+.PHONY: all install uninstall stow unstow clean
