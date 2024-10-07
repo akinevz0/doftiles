@@ -7,5 +7,6 @@ zsh/.config/zsh/.zcompdump*
 zsh/.config/zsh/.zsh_history
 neovim/.local/state/nvim/shada/main.shada
 neovim/.local/state/nvim/log
-neovim/.local/share/nvim/.netrwhist
-zsh-scripts/.local/share/oh-my-zsh
+neovim/.local/share/*
+neovim/.local/state/nvim/*
+zsh/.local/state/*
