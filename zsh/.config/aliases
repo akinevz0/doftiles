@@ -9,6 +9,9 @@ alias all='ls -al --color=auto'
 alias l='ls'
 alias s='ls -r'
 
+# text writin
+alias search='x-www-browser'
+
 # git
 
 # please
