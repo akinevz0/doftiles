@@ -13,7 +13,7 @@ all: install stow
 # Install packages using apt
 install:
 	sudo apt update
-	sudo apt install -y $(INSTALL_PACKAGES)
+	sudo apt install -y $(INSTALL_PACKAGES) build-essential
 	@echo "Installed $(INSTALL_PACKAGES)."
 
 uninstall:
@@ -27,6 +27,7 @@ stow-zsh: stow-zsh-scripts
 	@$(HOME)/.local/bin/install-zsh
 	@echo "Stowing zsh."
 	stow -v -t $(HOME) zsh
+	@chsh -s /usr/bin/zsh `whoami`
 
 stow-%:
 	@if echo $(PACKAGES) | grep -q $*; then \
