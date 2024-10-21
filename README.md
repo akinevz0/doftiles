@@ -2,6 +2,17 @@
 
 This is where my configs live.
 
+# TODO
+
+- Set up prompt for git user and email
+- Set up auto 
+
+	```bash
+	git config --global credential.helper "/mnt/c/Program\ Files/Git/mingw64/bin/git-credential-manager.exe"
+	```
+
+- Set up auto git rebase and autostash
+
 # Installation
 
 1. Clone the repository:
@@ -52,3 +63,4 @@ This is where my configs live.
 ```
 
 8. Additional packages can be created by making a stow package-directory and adding an entry to the Makefile's PACKAGES.
+
